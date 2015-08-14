@@ -14,7 +14,11 @@ define Package/qmp-nycmesh
   CATEGORY:=qMp
   TITLE:=qMp nycmesh
   MAINTAINER:=nycmesh
-  DEPENDS:= +nodogsplash
+  DEPENDS:= +nodogsplash \
+	+qmp-small-node \
+	+luci-ssl \
+	+wget
+
 endef
 
 define Package/qmp-nycmesh/description
