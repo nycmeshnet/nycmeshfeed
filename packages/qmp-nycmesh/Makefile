@@ -14,7 +14,7 @@ define Package/qmp-nycmesh
   CATEGORY:=qMp
   TITLE:=qMp nycmesh
   MAINTAINER:=nycmesh
-  DEPENDS:= +nodogsplash \
+  DEPENDS:=+nodogsplash \
 	+qmp-small-node \
 	+luci-ssl \
 	+wget \
@@ -30,20 +30,19 @@ define Build/Compile
 endef
 
 define Package/qmp-nycmesh/install
-	$(INSTALL_DIR) $(1)/etc/nycmesh
-	$(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_conf.sh $(1)/etc/nycmesh/nycmesh_conf.sh
-	$(INSTALL_BIN) ./files/etc/nycmesh/check_tunnel.sh $(1)/etc/nycmesh/check_tunnel.sh
-	$(INSTALL_BIN) ./files/etc/nycmesh/tinc_conf.sh $(1)/etc/nycmesh/tinc_conf.sh
-	$(INSTALL_BIN) ./files/etc/nycmesh/tinc_putkey.sh $(1)/etc/nycmesh/tinc_putkey.sh
-	$(INSTALL_DATA) ./files/etc/dropbear/authorized_keys $(1)/etc/dropbear/authorized_keys
- 	$(INSTALL_DATA) ./files/etc/passwd $(1)/etc/passwd
- 	$(INSTALL_DATA) ./files/etc/shadow $(1)/etc/shadow
-	$(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
-	$(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tunnelnycmesh $(1)/etc/tinc/nycmesh/hosts/tunnelnycmesh
-	$(CP) ./files/etc/init.d/* $(1)/
-        $(CP) ./files/etc/rc.d/* $(1)/
-
-
+	 $(INSTALL_DIR) $(1)/etc/nycmesh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_conf.sh $(1)/etc/nycmesh/nycmesh_conf.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/check_tunnel.sh $(1)/etc/nycmesh/check_tunnel.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_conf.sh $(1)/etc/nycmesh/tinc_conf.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_putkey.sh $(1)/etc/nycmesh/tinc_putkey.sh
+	 $(INSTALL_DIR) $(1)/etc/dropbear
+	 $(INSTALL_DATA) ./files/etc/dropbear/authorized_keys $(1)/etc/dropbear/authorized_keys
+	 $(INSTALL_DATA) ./files/etc/passwd $(1)/etc/passwd
+	 $(INSTALL_DATA) ./files/etc/shadow $(1)/etc/shadow
+	 $(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
+	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tunnelnycmesh $(1)/etc/tinc/nycmesh/hosts/tunnelnycmesh
+	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
+	 $(CP) ./files/etc/rc.d/* $(1)/etc/rc.d
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))
