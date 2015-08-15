@@ -41,6 +41,8 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DATA) ./files/etc/shadow $(1)/etc/shadow
 	 $(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
 	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tunnelnycmesh $(1)/etc/tinc/nycmesh/hosts/tunnelnycmesh
+	 $(INSTALL_DIR) $(1)/etc/init.d
+	 $(INSTALL_DIR) $(1)/etc/rc.d
 	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
 	 $(CP) ./files/etc/rc.d/* $(1)/etc/rc.d
 endef
