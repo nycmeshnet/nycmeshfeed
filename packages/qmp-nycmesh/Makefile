@@ -18,8 +18,8 @@ define Package/qmp-nycmesh
 	+qmp-small-node \
 	+luci-ssl \
 	+wget \
-	+reghack
-
+	+reghack \
+	+tinc
 endef
 
 define Package/qmp-nycmesh/description
