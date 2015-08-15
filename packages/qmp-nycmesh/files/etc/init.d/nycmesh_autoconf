@@ -1,0 +1,41 @@
+#!/bin/sh /etc/rc.common                                                                                                                          
+                                                                                                                                                  
+START=99                                                                                                                                          
+STOP=99                                                                                                                                           
+QMP_CONTROL_FILE="/qmp_configured"                                                                                                                
+NYCMESH_CONTROL_FILE="/nycmesh_configured"                                                                                                        
+                                                                                                                                                  
+boot() {                                                                                                                                          
+        echo boot                                                                                                                                 
+        if [ -e "$QMP_CONTROL_FILE" ]; then                                                                                                       
+                echo "qMp configured, running NYC Mesh conf"                                                                                      
+                configure                                                                                                                         
+        else                                                                                                                                      
+                echo "qMp is not configured yet"                                                                                                  
+        fi                                                                                                                                        
+}                                                                                                                                                 
+                                                                                                                                                  
+configure() {                                                                                                                                     
+        echo "entering configure"                                                                                                                 
+        if [ ! -e "$NYCMESH_CONTROL_FILE" ]; then                                                                                                 
+        echo "Configuring NYC Mesh"                                                                                                               
+        initial_conf                                                                                                                              
+        else                                                                                                                                      
+                echo "NYC Mesh is already configured"                                                                                             
+        fi                                                                                                                                        
+}                                                                                                                                                 
+                                                                                                                                                  
+initial_conf() {                                                                                                                                  
+        echo "running initial conf"                                                                                                               
+        /etc/nycmesh/nycmesh_conf.sh                                                                                                              
+        touch $NYCMESH_CONTROL_FILE                                                                                                               
+}                                                                                                                                                 
+                                                                                                                                                  
+start() {                                                                                                                                         
+        echo start                                                                                                                                
+                                                                                                                                                  
+}                                                                                                                                                 
+                                                                                                                                                  
+stop() {                                                                                                                                          
+        echo stop                                                                                                                                 
+}                 
