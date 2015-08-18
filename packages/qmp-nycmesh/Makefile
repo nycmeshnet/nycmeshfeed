@@ -20,6 +20,7 @@ define Package/qmp-nycmesh
 	+wget \
 	+reghack \
 	+tinc
+	+curl
 endef
 
 define Package/qmp-nycmesh/description
