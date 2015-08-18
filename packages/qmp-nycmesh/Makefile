@@ -19,7 +19,7 @@ define Package/qmp-nycmesh
 	+luci-ssl \
 	+wget \
 	+reghack \
-	+tinc
+	+tinc \
 	+curl
 endef
 
