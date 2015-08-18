@@ -44,7 +44,6 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DIR) $(1)/etc/init.d
 	 $(INSTALL_DIR) $(1)/etc/rc.d
 	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
-	 $(CP) ./files/etc/rc.d/* $(1)/etc/rc.d
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))
