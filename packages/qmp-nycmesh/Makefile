@@ -48,7 +48,7 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DIR) $(1)/etc/hotplug.d/iface
 	 $(INSTALL_DATA) ./files/etc/hotplug.d/iface/95-nodog $(1)/etc/hotplug.d/iface/95-nodog
 	 $(INSTALL_DIR) $(1)/etc/nodogsplash/htdocs
-	 $(INSTALL_DATA) ./files/etc/nodogsplash/htdocs/splash.html /etc/nodogsplash/htdocs/splash.html
+	 $(INSTALL_DATA) ./files/etc/nodogsplash/htdocs/splash.html $(1)/etc/nodogsplash/htdocs/splash.html
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))
