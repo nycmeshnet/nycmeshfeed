@@ -45,6 +45,8 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DIR) $(1)/etc/init.d
 	 $(INSTALL_DIR) $(1)/etc/rc.d
 	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
+	 $(INSTALL_DIR) $(1)/etc/hotplug.d/iface
+	 $(INSTALL_DATA) ./files/etc/hotplug.d/iface/95-nodog $(1)/etc/hotplug.d/iface/95-nodog
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))

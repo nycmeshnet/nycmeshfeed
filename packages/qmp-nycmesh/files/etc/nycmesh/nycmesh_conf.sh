@@ -39,11 +39,12 @@ uci set bmx6.tmain.tun4Address="$ip/24"
 uci set network.lan.ipaddr="$ip"
 uci set network.lan.netmask='255.255.255.0'
 
+uci set wireless.wlan0ap.ssid="$ssid"
+
+uci set nodogsplash.@instance[0].enabled='1'
+
 uci commit
 qmpcontrol configure_wifi
-
-uci set wireless.wlan0ap.ssid="$ssid"
-uci commit
 
 /etc/init.d/network restart
 
