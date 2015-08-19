@@ -45,6 +45,8 @@ uci commit
 qmpcontrol configure_wifi
 
 uci set wireless.wlan0ap.ssid="$ssid"
+uci set gateways.inet4.ignore='0'
+
 uci commit
 
 /etc/init.d/network restart
