@@ -38,10 +38,11 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_putkey.sh $(1)/etc/nycmesh/tinc_putkey.sh
 	 $(INSTALL_DIR) $(1)/etc/dropbear
 	 $(INSTALL_DATA) ./files/etc/dropbear/authorized_keys $(1)/etc/dropbear/authorized_keys
-	 $(INSTALL_DATA) ./files/etc/passwd $(1)/etc/passwd
-	 $(INSTALL_DATA) ./files/etc/shadow $(1)/etc/shadow
+	 $(CP) ./files/etc/passwd $(1)/etc/passwd
+	 $(CP) ./files/etc/shadow $(1)/etc/shadow
 	 $(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
 	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tunnelnycmesh $(1)/etc/tinc/nycmesh/hosts/tunnelnycmesh
+	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tinc-up $(1)/etc/tinc/nycmesh/tinc-up
 	 $(INSTALL_DIR) $(1)/etc/init.d
 	 $(INSTALL_DIR) $(1)/etc/rc.d
 	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
