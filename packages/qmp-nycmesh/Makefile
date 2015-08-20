@@ -21,7 +21,9 @@ define Package/qmp-nycmesh
 	+reghack \
 	+tinc \
 	+curl \
-	+6in4
+	+6in4 \
+	+kmod-ipt-conntrack-extra \
+	+gnupg
 endef
 
 define Package/qmp-nycmesh/description
