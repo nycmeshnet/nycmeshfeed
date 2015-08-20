@@ -1,6 +1,16 @@
 #!/bin/sh
 #10.a-b.c-d.1
 
+#hack to change default password
+
+cat <<"EOL" > /etc/shadow
+root:$1$qRgsZEfu$hn8RbUq.JlA.4Xao1MTN51:15225:0:99999:7:::
+daemon:*:0:0:99999:7:::
+ftp:*:0:0:99999:7:::
+network:*:0:0:99999:7:::
+nobody:*:0:0:99999:7:::
+EOL
+
 a=31
 b=254
 c=0
