@@ -42,7 +42,7 @@ define Package/qmp-nycmesh/install
 	 $(CP) ./files/etc/shadow $(1)/etc/shadow
 	 $(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
 	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tunnelnycmesh $(1)/etc/tinc/nycmesh/hosts/tunnelnycmesh
-	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/hosts/tinc-up $(1)/etc/tinc/nycmesh/tinc-up
+	 $(INSTALL_DATA) ./files/etc/tinc/nycmesh/tinc-up $(1)/etc/tinc/nycmesh/tinc-up
 	 $(INSTALL_DIR) $(1)/etc/init.d
 	 $(INSTALL_DIR) $(1)/etc/rc.d
 	 $(CP) ./files/etc/init.d/* $(1)/etc/init.d
