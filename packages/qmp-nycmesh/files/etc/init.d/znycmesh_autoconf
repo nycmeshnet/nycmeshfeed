@@ -22,6 +22,7 @@ configure() {
         initial_conf                                                                                                                              
         else                                                                                                                                      
                 echo "NYC Mesh is already configured"                                                                                             
+		start_up
         fi                                                                                                                                        
 }                                                                                                                                                 
                                                                                                                                                   
@@ -29,10 +30,14 @@ initial_conf() {
         echo "running initial conf"                                                                                                               
         /etc/nycmesh/nycmesh_conf.sh                                                                                                              
         touch $NYCMESH_CONTROL_FILE                                                                                                               
-# run's via nycmesh_conf.sh
+# runs via nycmesh_conf.sh
 #	qmpcontrol configure_wifi
 	reboot
-}                                                                                                                                                 
+}
+start_up() {
+	echo Startup
+	tincd -n nycmesh
+}
                                                                                                                                                   
 start() {                                                                                                                                         
         echo start                                                                                                                                

@@ -19,16 +19,18 @@ EOL
 tincd -K2048 -n nycmesh </dev/null
 
 #tinc tinc-up script
-cat <<"TAGTEXTFILE" > /etc/tinc/nycmesh/tinc-up
+#moved to Makefile
+#cat <<"TAGTEXTFILE" > /etc/tinc/nycmesh/tinc-up
 #/bin/sh
-ip link set dev $INTERFACE up
-ip link set mtu 1350 dev $INTERFACE
-iptables -A FORWARD -p tcp -o $INTERFACE -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
-bmx6 -c -i $INTERFACE
-TAGTEXTFILE
-chmod +x /etc/tinc/nycmesh/tinc-up
+#ip link set dev $INTERFACE up
+#ip link set mtu 1350 dev $INTERFACE
+#iptables -A FORWARD -p tcp -o $INTERFACE -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+#bmx6 -c -i $INTERFACE
+#TAGTEXTFILE
+#chmod +x /etc/tinc/nycmesh/tinc-up
 
-sed -i -e '$i \tincd -n nycmesh' /etc/rc.local
+#Moved to nycmesh init script
+#sed -i -e '$i \tincd -n nycmesh' /etc/rc.local
 
 echo "/etc/tinc" >> /etc/sysupgrade.conf
 
