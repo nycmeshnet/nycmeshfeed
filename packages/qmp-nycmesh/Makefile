@@ -28,7 +28,7 @@ PKG_NAME:=qmp-nycmesh
 PKG_VERSION:=1
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-2.0+
-NYCMESH_VERSION:=$(cat ../../.git/refs/heads/master)
+NYCMESH_VERSION:=$(cat ../.git/refs/heads/master)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -76,7 +76,7 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DATA) ./files/etc/hotplug.d/iface/95-nodog $(1)/etc/hotplug.d/iface/95-nodog
 	 $(INSTALL_DIR) $(1)/etc/nodogsplash/htdocs
 	 $(INSTALL_DATA) ./files/etc/nodogsplash/htdocs/splash.html $(1)/etc/nodogsplash/htdocs/splash.html
-	 $(INSTALL_DATA) ./files/etc/nycmesh/nycmesh.banner $(1)/etc/nycmesh/nycmesh/nycmesh.banner
+	 $(INSTALL_DATA) ./files/etc/nycmesh/nycmesh.banner $(1)/etc/nycmesh/nycmesh.banner
 	 $(SED) 's,$$$$VERSION,$(NYCMESH_VERSION),g' $(1)/etc/nycmesh.banner
 endef
 
