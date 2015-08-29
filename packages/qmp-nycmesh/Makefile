@@ -76,6 +76,7 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DATA) ./files/etc/hotplug.d/iface/95-nodog $(1)/etc/hotplug.d/iface/95-nodog
 	 $(INSTALL_DIR) $(1)/etc/nodogsplash/htdocs
 	 $(INSTALL_DATA) ./files/etc/nodogsplash/htdocs/splash.html $(1)/etc/nodogsplash/htdocs/splash.html
+	 $(INSTALL_DATA) ./files/etc/nycmesh.banner $(1)/etc/nycmesh/nycmesh.banner
 	 $(SED) 's,$$$$VERSION,$(NYCMESH_VERSION),g' $(1)/etc/nycmesh.banner
 endef
 
