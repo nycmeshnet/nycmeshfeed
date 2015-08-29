@@ -1,19 +1,42 @@
-# qmp-nycmesh openwrt package
+#    Copyright (C) 2015 NYC Mesh, http://www.nycmesh.net
 #
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+#    The full GNU General Public License is included in this distribution in
+#    the file called "COPYING".
+#
+# Contributors:
+#	Daniel J. Grinkevich
+#
+
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=qmp-nycmesh
 PKG_VERSION:=1
 PKG_RELEASE:=1
+PKG_LICENSE:=GPL-2.0+
+NYCMESH_VERSION=$(cat ../../.git/refs/heads/master)
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/qmp-nycmesh
   SECTION:=utils
   CATEGORY:=qMp
-  TITLE:=qMp nycmesh
-  MAINTAINER:=nycmesh
+  TITLE:=qMp NYC Mesh Configuration
+  MAINTAINER:=NYC Mesh
   DEPENDS:=+nodogsplash \
 	+qmp-small-node \
 	+luci-ssl \
@@ -27,7 +50,7 @@ define Package/qmp-nycmesh
 endef
 
 define Package/qmp-nycmesh/description
- nycmesh confs
+ Configuration files for the NYC Mesh.
 endef
 
 define Build/Compile
@@ -53,6 +76,7 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_DATA) ./files/etc/hotplug.d/iface/95-nodog $(1)/etc/hotplug.d/iface/95-nodog
 	 $(INSTALL_DIR) $(1)/etc/nodogsplash/htdocs
 	 $(INSTALL_DATA) ./files/etc/nodogsplash/htdocs/splash.html $(1)/etc/nodogsplash/htdocs/splash.html
+	 $(SED) 's,$$$$VERSION,$(NYCMESH_VERSION),g' $(1)/etc/nycmesh.banner
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))

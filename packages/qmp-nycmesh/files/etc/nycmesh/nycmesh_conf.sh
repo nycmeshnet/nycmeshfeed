@@ -1,4 +1,5 @@
 #!/bin/sh
+
 #10.a-b.c-d.1
 
 #hack to change default password
@@ -49,13 +50,13 @@ uci set bmx6.tmain.tun4Address="$ip/24"
 uci set network.lan.ipaddr="$ip"
 uci set network.lan.netmask='255.255.255.0'
 
-
+#nodog settings
 uci set nodogsplash.@instance[0].enabled='1'
 uci set nodogsplash.@instance[0].gatewayname='NYC Mesh Splash'
 uci del_list nodogsplash.@instance[0].authenticated_users='block to 10.0.0.0/8'
 uci add_list nodogsplash.@instance[0].authenticated_users='block to 172.16.0.0/12'
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all to 10.0.0.0/8'
-
+uci set nodogsplash.@instance[0].RedirectURL='http://nycmesh.net/'
 #temporary until we decide what ports
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all'
 
@@ -63,10 +64,8 @@ uci commit
 qmpcontrol configure_wifi
 
 uci set wireless.wlan0ap.ssid="$ssid"
-
 #this doesn't seem to be working as intended
 uci set gateways.inet4.ignore='0'
-
 uci commit
 
 /etc/init.d/network restart

@@ -33,4 +33,3 @@ tincd -K2048 -n nycmesh </dev/null
 #sed -i -e '$i \tincd -n nycmesh' /etc/rc.local
 
 echo "/etc/tinc" >> /etc/sysupgrade.conf
-
