@@ -97,4 +97,4 @@ echo 'iptables -A INPUT -j DROP -i $wan' >> /etc/firewall.user
 
 #keep /etc/nycmesh during upgrades
 echo "/etc/nycmesh" >> /etc/sysupgrade.conf
-
+cat /etc/nycmesh/nycmesh.banner >> /etc/banner
