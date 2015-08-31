@@ -1,0 +1,3 @@
+#!/bin/sh
+cat /etc/nycmesh/nycmesh.banner >> /etc/banner
+exit 0

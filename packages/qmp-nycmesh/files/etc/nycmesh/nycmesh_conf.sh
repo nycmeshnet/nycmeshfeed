@@ -31,6 +31,8 @@ devname="nycmesh"
 hostname="$devname-$node"
 ssid="nycmesh $node"
 
+touch /etc/conf/nycmesh
+
 uci set system.@system[0].hostname="$hostname"
 uci set qmp.node.community_id="$devname"
 
@@ -87,14 +89,21 @@ echo "iptables -I FORWARD -d 192.168.0.0/16 -j DROP" >> /etc/firewall.user
 echo "iptables -I FORWARD -d 172.16.0.0/12 -j DROP" >> /etc/firewall.user
 echo "iptables -I FORWARD -o eth+ -d 10.0.0.0/8 -j DROP" >> /etc/firewall.user
 
-echo "#allow only SSH and tinc on WAN" >> /etc/firewall.user
+echo "#allow only SSH (rate limit) and tinc on WAN" >> /etc/firewall.user
 echo 'wan=$(uci get qmp.interfaces.wan_devices)' >> /etc/firewall.user
 echo 'iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT' >> /etc/firewall.user
 echo 'iptables -A INPUT -p tcp --dport 22 -j ACCEPT -i $wan' >> /etc/firewall.user
 echo 'iptables -A INPUT -p tcp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
 echo 'iptables -A INPUT -p udp --dport 655 -j ACCEPT -i $wan' >> /etc/firewall.user
+echo 'iptables -I INPUT -p tcp --dport 22 -i $wan -m state --state NEW -m recent --set' >> /etc/firewall.user
+echo 'iptables -I INPUT -p tcp --dport 22 -i $wan -m state --state NEW -m recent  --update --seconds 60 --hitcount 4 -j DROP' >> /etc/firewall.user
 echo 'iptables -A INPUT -j DROP -i $wan' >> /etc/firewall.user
 
 #keep /etc/nycmesh during upgrades
-echo "/etc/nycmesh" >> /etc/sysupgrade.conf
-cat /etc/nycmesh/nycmesh.banner >> /etc/banner
+echo "/nycmesh_configured" >> /etc/sysupgrade.conf
+echo "/qmp_configured" >> /etc/sysupgrade.cond
+echo "/etc/mdns" >> /etc/sysupgrade.conf
+
+#set banner
+#moved to uci-defaults
+#cat /etc/nycmesh/nycmesh.banner >> /etc/banner
