@@ -49,7 +49,7 @@ define Package/qmp-nycmesh
 	+6in4 \
 	+kmod-ipt-conntrack-extra \
 	+iptables-mod-conntrack-extra \
-	+wshaper
+	+luci-app-wshaper
 endef
 
 define Package/qmp-nycmesh/description
