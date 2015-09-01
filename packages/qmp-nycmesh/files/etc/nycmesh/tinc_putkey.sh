@@ -21,12 +21,14 @@ elif [ "$internet" = "1" ]
   node=$(cat /etc/tinc/nycmesh/tinc.conf |grep Name | cut -d" " -f3)
   key=$(cat /etc/tinc/nycmesh/hosts/$node)
   ip=$(uci get qmp.networks.lan_address)
+  board=$(cat /tmp/sysinfo/board_name)
   auth="yes"
   ver=1
 
   response=$(curl -Fnode="$node" \
 	-Fkey="$key" \
 	-Fip="$ip" \
+	-Fboard="$board" \
 	-Fauth="yes" \
 	-Fver="1" \
 	http://themesh.nyc/publickey/putkey.php)

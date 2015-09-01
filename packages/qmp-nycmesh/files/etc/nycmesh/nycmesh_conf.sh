@@ -83,6 +83,16 @@ uci set wireless.wlan0ap.ssid="$ssid"
 uci set gateways.inet4.ignore='0'
 uci commit
 
+#fix for nsm5 vlan issue
+board=$(cat /tmp/sysinfo/board_name)
+if [ "$board" = "nanostation-m-xw" ]; then
+uci add network switch_vlan
+uci set network.@switch_vlan[-1].device='switch0'
+uci set network.@switch_vlan[-1].vlan='2'
+uci set network.@switch_vlan[-1].ports='0t 1'
+uci set network.@switch_vlan[-1].vid='2'
+fi
+
 /etc/init.d/network restart
 
 echo "qmp mesh" > /etc/mdns/domain4
