@@ -71,7 +71,7 @@ uci set nodogsplash.@instance[0].gatewayname='NYC Mesh Splash'
 uci del_list nodogsplash.@instance[0].authenticated_users='block to 10.0.0.0/8'
 uci add_list nodogsplash.@instance[0].authenticated_users='block to 172.16.0.0/12'
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all to 10.0.0.0/8'
-uci set nodogsplash.@instance[0].RedirectURL='http://nycmesh.net/'
+uci set nodogsplash.@instance[0].redirecturl='http://nycmesh.net/'
 #temporary until we decide what ports
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all'
 
