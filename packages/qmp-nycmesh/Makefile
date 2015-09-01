@@ -48,7 +48,8 @@ define Package/qmp-nycmesh
 	+curl \
 	+6in4 \
 	+kmod-ipt-conntrack-extra \
-	+iptables-mod-conntrack-extra
+	+iptables-mod-conntrack-extra \
+	+wshaper
 endef
 
 define Package/qmp-nycmesh/description
@@ -60,7 +61,8 @@ endef
 
 define Package/qmp-nycmesh/install
 	 $(INSTALL_DIR) $(1)/etc/nycmesh
-	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_conf.sh $(1)/etc/nycmesh/nycmesh_conf.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_initial_conf.sh $(1)/etc/nycmesh/nycmesh_initial_conf.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_configure.sh $(1)/etc/nycmesh/nycmesh_configure.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/check_tunnel.sh $(1)/etc/nycmesh/check_tunnel.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_conf.sh $(1)/etc/nycmesh/tinc_conf.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_putkey.sh $(1)/etc/nycmesh/tinc_putkey.sh

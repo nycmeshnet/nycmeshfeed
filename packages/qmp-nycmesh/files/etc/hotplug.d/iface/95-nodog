@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ "$ACTION" = ifup ]; then
     if [ "$DEVICE" = "br-lan" ]; then
-        /etc/init.d/nodogsplash enabled 
+        #/etc/init.d/nodogsplash enabled 
 	/etc/init.d/nodogsplash stop
 	sleep 120
 	/etc/init.d/nodogsplash start

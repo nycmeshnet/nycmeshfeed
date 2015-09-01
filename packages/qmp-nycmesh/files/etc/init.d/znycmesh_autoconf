@@ -28,7 +28,7 @@ configure() {
                                                                                                                                                   
 initial_conf() {                                                                                                                                  
         echo "running initial conf"                                                                                                               
-        /etc/nycmesh/nycmesh_conf.sh                                                                                                              
+        /etc/nycmesh/nycmesh_initial_conf.sh                                                                                                              
         touch $NYCMESH_CONTROL_FILE                                                                                                               
 # runs via nycmesh_conf.sh
 #	qmpcontrol configure_wifi
