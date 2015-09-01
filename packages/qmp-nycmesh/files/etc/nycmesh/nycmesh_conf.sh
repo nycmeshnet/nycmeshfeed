@@ -3,7 +3,6 @@
 #10.a-b.c-d.1
 
 #hack to change default password
-
 cat <<"EOL" > /etc/shadow
 root:$1$qRgsZEfu$hn8RbUq.JlA.4Xao1MTN51:15225:0:99999:7:::
 daemon:*:0:0:99999:7:::
@@ -12,6 +11,7 @@ network:*:0:0:99999:7:::
 nobody:*:0:0:99999:7:::
 EOL
 
+#set ip ranges
 a=31
 b=254
 c=0
@@ -31,13 +31,26 @@ devname="nycmesh"
 hostname="$devname-$node"
 ssid="nycmesh $node"
 
-touch /etc/conf/nycmesh
+touch /etc/config/nycmesh
+echo "config nycmesh 'main'" > /etc/config/nycmesh
+uci set nycmesh.main.hostname="$hostname"
+uci set nycmesh.main.ssid="$ssid"
 
 uci set system.@system[0].hostname="$hostname"
 uci set qmp.node.community_id="$devname"
 
-uci set qmp.@wireless[0].channel='6'
-uci set wireless.radio0.channel='6'
+channel=$(uci get wireless.radio0.channel)
+#default to 6
+newchannel=6
+if [ "$channel" -le 14 ]; then
+	newchannel=6
+elif [ "$channel" -ge 36 ]; then
+	newchannel=165
+fi
+
+#this needs to be fixed to allow for dual band units 
+uci set qmp.@wireless[0].channel="$newchannel"
+uci set wireless.radio0.channel="$newchannel"
 
 uci set qmp.networks.bmx6_ipv4_address="$ip/24"
 uci set qmp.roaming.ignore='1'
