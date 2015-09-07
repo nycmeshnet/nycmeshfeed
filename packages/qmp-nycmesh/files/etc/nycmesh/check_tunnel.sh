@@ -21,8 +21,8 @@ mtu=$(bmx6 -c -p |grep tunMtu | awk '{print $2}')
 
 #check mtu, needs to be lower because of vpn tunnel
 echo "tunmtu: $mtu"
-if [ "$mtu" -ne "1300" ]; then
-        echo "tunnel mutu wrong, fixing"
+if [ -z "$mtu$ ] || [ "$mtu" -ne "1300" ]; then
+        echo "tunnel mtu wrong, fixing"
         bmx6 -c --tunmtu 1300
 else
         echo "tunnel mtu is ok"
