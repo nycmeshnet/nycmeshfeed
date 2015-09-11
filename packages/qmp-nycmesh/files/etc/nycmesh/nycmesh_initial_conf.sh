@@ -72,6 +72,11 @@ uci del_list nodogsplash.@instance[0].authenticated_users='block to 10.0.0.0/8'
 uci add_list nodogsplash.@instance[0].authenticated_users='block to 172.16.0.0/12'
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all to 10.0.0.0/8'
 uci set nodogsplash.@instance[0].redirecturl='http://nycmesh.net/'
+#one hour
+uci set nodogsplash.@instance[0].clientidletimeout='60'
+#one day
+uci set nodogsplash.@instance[0].clientforcetimeout='1440'
+
 #temporary until we decide what ports
 uci add_list nodogsplash.@instance[0].authenticated_users='allow all'
 
@@ -97,6 +102,16 @@ fi
 
 echo "qmp mesh" > /etc/mdns/domain4
 echo "qm6 mesh6" > /etc/mdns/domain6
+
+#libremap
+uci del_list libremap.settings.api_url='http://libremap.berlin.freifunk.net/api'
+uci del_list libremap.settings.api_url='http://libremap.net/api/'
+uci add_list libremap.settings.api_url='http://map.mesh/api'
+uci set libremap.settings.community='NYC Mesh'
+uci set libremap.location.latitude='40.52'
+uci set libremap.location.longitude='-74'
+uci commit
+/etc/init.d/libremap-agent enable
 
 #configure tinc
 /etc/nycmesh/tinc_conf.sh
@@ -124,7 +139,7 @@ echo 'iptables -A INPUT -j DROP -i $wan' >> /etc/firewall.user
 
 #keep /etc/nycmesh during upgrades
 echo "/nycmesh_configured" >> /etc/sysupgrade.conf
-echo "/qmp_configured" >> /etc/sysupgrade.cond
+echo "/qmp_configured" >> /etc/sysupgrade.conf
 echo "/etc/mdns" >> /etc/sysupgrade.conf
 
 #set banner

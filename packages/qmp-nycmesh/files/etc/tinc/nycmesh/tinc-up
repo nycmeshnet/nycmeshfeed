@@ -4,4 +4,5 @@ ip link set mtu 1350 dev $INTERFACE
 iptables -A FORWARD -p tcp -o $INTERFACE -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
 #moved to check script
 #bmx6 -c -i $INTERFACE /rateMax 10000 /rateMin 10000
+sleep 60
 /etc/init.d/mdns reload

@@ -44,7 +44,7 @@ define Package/qmp-nycmesh
 	+luci-ssl \
 	+wget \
 	+reghack \
-	+tinc \
+	+tinc-1.1 \
 	+curl \
 	+6in4 \
 	+kmod-ipt-conntrack-extra \
@@ -86,7 +86,7 @@ define Package/qmp-nycmesh/install
 	 $(SED) 's,$$$$BUILDDATE,$(NYCMESH_BUILDDATE),g' $(1)/etc/nycmesh/nycmesh.release
 	 $(SED) 's,$$$$BRANCH,$(NYCMESH_BRANCH),g' $(1)/etc/nycmesh/nycmesh.release
 	 $(INSTALL_DIR) $(1)/etc/uci-defaults
-	 $(CP) ./files/etc/uci-defaults/znycmesh_banner $(1)/etc/uci-defaults/znycmesh_banner
+	 $(CP) ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))

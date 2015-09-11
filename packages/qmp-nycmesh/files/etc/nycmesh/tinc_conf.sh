@@ -16,8 +16,10 @@ ConnectTo = tunnelnycmesh
 EOL
 
 #generate key
-tincd -K2048 -n nycmesh </dev/null
-
+#1.0.x
+#tincd -K2048 -n nycmesh </dev/null
+#1.1
+tinc -n nycmesh generate-keys 2048 </dev/null
 #tinc tinc-up script
 #moved to Makefile
 #cat <<"TAGTEXTFILE" > /etc/tinc/nycmesh/tinc-up
