@@ -2,6 +2,13 @@
 
 #rev 0
 
+if pgrep "tincd" >/dev/null; then 
+  echo "tincd is running"
+else
+  echo "tincd isn't running, restarting"
+  tincd -n nycmesh
+fi
+
 interfaces="tap0"
 
 for i in $interfaces

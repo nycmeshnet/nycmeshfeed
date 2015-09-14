@@ -9,3 +9,4 @@ if [ -z "$clientidletimeout" ]; then
   echo "setting clientidletimeout"
   uci set nodogsplash.@instance[0].clientidletimeout='60'
 fi
+exit 0

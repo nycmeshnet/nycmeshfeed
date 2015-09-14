@@ -1,6 +1,7 @@
 #/bin/sh
 
 #check for Internet connection
+
 wget --spider http://www.google.com >/dev/null 2>&1
 if [ "$?" != 0 ]; then
   echo "No Internet!"
@@ -18,10 +19,11 @@ elif [ "$internet" = "1" ]
   then
   echo "uploading key"
   #set node info
-  node=$(cat /etc/tinc/nycmesh/tinc.conf |grep Name | cut -d" " -f3)
+  node=$(cat /etc/tinc/nycmesh/tinc.conf |grep [Nn]ame | cut -d" " -f3)
   key=$(cat /etc/tinc/nycmesh/hosts/$node)
   ip=$(uci get qmp.networks.lan_address)
   board=$(cat /tmp/sysinfo/board_name)
+  rev=$(cat /etc/nycmesh/nycmesh.release | awk -F'[/=]' '/REVISION/ {print $2}')
   auth="yes"
   ver=1
 
@@ -29,6 +31,7 @@ elif [ "$internet" = "1" ]
 	-Fkey="$key" \
 	-Fip="$ip" \
 	-Fboard="$board" \
+	-Frev="$rev" \
 	-Fauth="yes" \
 	-Fver="1" \
 	http://themesh.nyc/publickey/putkey.php)
