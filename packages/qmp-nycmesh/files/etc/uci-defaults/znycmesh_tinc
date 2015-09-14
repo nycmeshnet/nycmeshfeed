@@ -1,2 +1,3 @@
 #!/bin/sh
+/etc/nycmesh/tinc_conf.sh
 exit 0
