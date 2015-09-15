@@ -9,7 +9,8 @@ else
   tincd -n nycmesh
 fi
 
-interfaces="tap0"
+wired=$(ifconfig | awk '/eth[0-9]ad/ {print $1}')
+interfaces="tap0 $wired"
 
 for i in $interfaces
 do
