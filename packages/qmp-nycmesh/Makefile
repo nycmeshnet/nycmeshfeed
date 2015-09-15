@@ -44,7 +44,7 @@ define Package/qmp-nycmesh
 	+luci-ssl \
 	+wget \
 	+reghack \
-	+tinc \
+	+tinc-1.1 \
 	+curl \
 	+6in4 \
 	+kmod-ipt-conntrack-extra \
@@ -66,6 +66,7 @@ define Package/qmp-nycmesh/install
 	 $(INSTALL_BIN) ./files/etc/nycmesh/check_tunnel.sh $(1)/etc/nycmesh/check_tunnel.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_conf.sh $(1)/etc/nycmesh/tinc_conf.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/tinc_putkey.sh $(1)/etc/nycmesh/tinc_putkey.sh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_startup.sh $(1)/etc/nycmesh/nycmesh_startup.sh
 	 $(INSTALL_DIR) $(1)/etc/dropbear
 	 $(INSTALL_DATA) ./files/etc/dropbear/authorized_keys $(1)/etc/dropbear/authorized_keys
 	 $(INSTALL_DIR) $(1)/etc/tinc/nycmesh/hosts
@@ -86,7 +87,7 @@ define Package/qmp-nycmesh/install
 	 $(SED) 's,$$$$BUILDDATE,$(NYCMESH_BUILDDATE),g' $(1)/etc/nycmesh/nycmesh.release
 	 $(SED) 's,$$$$BRANCH,$(NYCMESH_BRANCH),g' $(1)/etc/nycmesh/nycmesh.release
 	 $(INSTALL_DIR) $(1)/etc/uci-defaults
-	 $(CP) ./files/etc/uci-defaults/znycmesh_banner $(1)/etc/uci-defaults/znycmesh_banner
+	 $(CP) ./files/etc/uci-defaults/* $(1)/etc/uci-defaults
 endef
 
 $(eval $(call BuildPackage,qmp-nycmesh))

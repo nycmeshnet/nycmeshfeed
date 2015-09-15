@@ -1,0 +1,12 @@
+#!/bin/sh
+clientforcetimeout=$(uci get nodogsplash.@instance[0].clientforcetimeout)
+clientidletimeout=$(uci get nodogsplash.@instance[0].clientidletimeout)
+if [ -z "$clientforcetimeout" ]; then
+  echo "setting clientforcetimeout"
+  uci set nodogsplash.@instance[0].clientforcetimeout='1440'
+fi
+if [ -z "$clientidletimeout" ]; then
+  echo "setting clientidletimeout"
+  uci set nodogsplash.@instance[0].clientidletimeout='60'
+fi
+exit 0

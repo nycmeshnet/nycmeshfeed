@@ -1,35 +1,72 @@
 #!/bin/sh
-
 #rev 0
-
-mkdir -p /etc/tinc/nycmesh/hosts
-
-#tinc conf
+ 
+#define network
+network='nycmesh'
+tincdir="/etc/tinc/$network"
+tincconf="$tincdir/tinc.conf"
 mac=$(ip link show eth0 | awk '/ether/ {print $2}' | sed s/://g)
-
-cat >/etc/tinc/nycmesh/tinc.conf << EOL
+ 
+#create initial configuration
+createconf(){
+cat >"$tincdir/tinc.conf" << EOL
 Name = $mac
 AddressFamily = any
 Interface = tap0
 Mode = switch
 ConnectTo = tunnelnycmesh
+AutoConnect = Yes
 EOL
-
-#generate key
-tincd -K2048 -n nycmesh </dev/null
-
-#tinc tinc-up script
-#moved to Makefile
-#cat <<"TAGTEXTFILE" > /etc/tinc/nycmesh/tinc-up
-#/bin/sh
-#ip link set dev $INTERFACE up
-#ip link set mtu 1350 dev $INTERFACE
-#iptables -A FORWARD -p tcp -o $INTERFACE -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
-#bmx6 -c -i $INTERFACE
-#TAGTEXTFILE
-#chmod +x /etc/tinc/nycmesh/tinc-up
-
-#Moved to nycmesh init script
-#sed -i -e '$i \tincd -n nycmesh' /etc/rc.local
-
-echo "/etc/tinc" >> /etc/sysupgrade.conf
+}
+ 
+#generate keys
+genkey(){                                              
+version=$(tincd --version | awk '/version/ {print $3}')
+major=${version:0:3}                                  
+if [ "$major" = "1.0" ]; then                          
+  echo "1.0.x"                                        
+  tincd -K2048 -n $network </dev/null                  
+fi                                                    
+if [ "$major" = "1.1" ]; then                          
+  echo "1.1.x"                                        
+  tinc -n $network generate-keys 2048 </dev/null      
+fi                                                    
+}
+ 
+#check if tinc 1.0 -> 1.1
+checkupgrade(){
+echo "checking upgrade"
+version=$(tincd --version | awk '/version/ {print $3}')
+major=${version:0:3}
+name=$(awk '/[nN]ame/ {print $3}' $tincconf)
+echo $name
+if [ "$major" = "1.1" ]; then
+  if grep -q "Ed25519PublicKey" $tincdir/hosts/$name; then
+    echo "Ed25519PublicKey found"
+  else
+    echo "Ed25519PublicKey not found"
+    tinc -n $network generate-ed25519-keys
+    tinc -n $network set AutoConnect Yes
+    (crontab -l ; echo "* * * * * /etc/nycmesh/tinc_putkey.sh")| crontab -
+  fi
+else
+  echo "version 1.0.x, not an upgrade"
+fi
+}
+ 
+#main script
+mkdir -p "$tincdir/hosts"
+ 
+if [ -f "$tincdir/tinc.conf" ]; then
+  echo "tinc already configured"
+  checkupgrade
+else
+  echo "not conf"
+  createconf
+  genkey
+fi
+ 
+#save tinc settings across upgrades
+if grep -q tinc /etc/sysupgrade.conf; then
+  echo "/etc/tinc" >> /etc/sysupgrade.conf
+fi

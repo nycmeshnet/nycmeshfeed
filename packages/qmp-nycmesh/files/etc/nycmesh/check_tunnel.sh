@@ -2,7 +2,15 @@
 
 #rev 0
 
-interfaces="tap0"
+if pgrep "tincd" >/dev/null; then 
+  echo "tincd is running"
+else
+  echo "tincd isn't running, restarting"
+  tincd -n nycmesh
+fi
+
+wired=$(ifconfig | awk '/eth[0-9]ad/ {print $1}')
+interfaces="tap0 $wired"
 
 for i in $interfaces
 do
