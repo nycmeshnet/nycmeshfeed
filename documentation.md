@@ -18,10 +18,10 @@ nycmeshfeed/packages/**qmp-nycmesh/**
 * contains the NYC Mesh public ssh key
 
 **hotplug.d/iface/95-nodog**  
-starts or restarts nodog after LAN interface is up
+* starts or restarts nodog after LAN interface is up
 
 **init.d/znycmesh_autoconf**  
-	init script on boot, waits for qMp to configure then runs initial_conf
+* init script on boot, waits for qMp to configure then runs initial_conf
 
 **nodogsplash/htdocs/splash.html**  
 * nodog splash screen
