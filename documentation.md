@@ -49,9 +49,11 @@ nycmeshfeed/packages/**qmp-nycmesh/**
 * sets up libremap, calls the tinc config script
 * adds crontab for checktunnel script
 * adds crontab to upload tinc key, adds firewall rules- blocks access to private address space and allows shh and tinc on the WAN. 
-* Configures OpenWrt to save files on upgrade.  
+* Configures OpenWrt to save files on upgrade
+
 **nycmesh_startup.sh**
-* adds wired meshing interfaces  
+* adds wired meshing interfaces 
+
 **tinc_conf.sh**
 * generates initial tinc configuration file and key
 
