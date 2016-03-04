@@ -1,4 +1,4 @@
-This package modifies the standard qMp firmware with setting specific to NYC Mesh. It also adds-
+The **qmp-nycmesh** package modifies the standard qMp firmware with settings specific to NYC Mesh. It also adds-
 * tinc (VPN tunneling)
 * nodogsplash (captive portal splash page)
 * a public ssh key
