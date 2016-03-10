@@ -30,8 +30,8 @@ For details, see: [docs/architecture.md](docs/architecture.md)
 
 Build example:
 ```
-make -T=nsm5 build
-make -T=nsm5 post_build
+make T=nsm5 build
+make T=nsm5 post_build
 
 # image will be in images/
 ```

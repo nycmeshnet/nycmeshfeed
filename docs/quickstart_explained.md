@@ -86,8 +86,8 @@ Build Explained
 ---------------
 
 ```
-make -T=nsm5 build
-make -T=nsm5 post_build
+make T=nsm5 build
+make T=nsm5 post_build
 ```
 
 qmp (and openwrt) support a number of hardware targets, which are specified
