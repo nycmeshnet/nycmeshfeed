@@ -1,7 +1,7 @@
 Documentation
 =============
 
-This directory conatins longer documentation about the project.
+This directory contains longer documentation about the project.
 A short summary of each file is listed below.
 
 Table Of Contents
