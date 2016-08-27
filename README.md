@@ -6,6 +6,13 @@ Quick start docs are here. Detailed docs are [here](docs)
 Quick Environment Setup
 -----------------------
 
+In case you don't have these tools already type (if you're in debian):  
+'''shell apt-get install git make gcc g++ zlib1g-dev libssl-dev wget subversion file python apt-utils binfmt-support \
+vim apt-file xz-utils sudo subversion zlib1g-dev gawk flex unzip bzip2 gettext build-essential libncurses5-dev \
+libncursesw5-dev libssl-dev binutils cpp psmisc docbook-to-man gcc-multilib g++-multilib '''
+
+If you are on Mac use brew. 
+
 This is the start of the nycmesh openwrt / qmp feed, to make building easier
 ```
 git clone git://qmp.cat/qmpfw.git qmp-3.2-rc3
@@ -18,9 +25,6 @@ cd build/qmp && git checkout -b v3.2-rc3 && cd ../..
 echo "src-git nycmeshfeed https://github.com/nycmeshnet/nycmeshfeed.git" >> ./build/openwrt/feeds.conf
 ./build/openwrt/scripts/feeds update -a
 ./build/openwrt/scripts/feeds install -a
-
-# Run menuconfig and select QMP->qmp-nycmesh package
-make menuconfig
 ```
 
 A step by step explanation of the above is [here](docs/quickstart_explained.md)
