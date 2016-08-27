@@ -17,19 +17,20 @@ If you are on Mac, use brew.
 
 This is the start of the nycmesh openwrt / qmp feed, to make building easier
 ```
-git clone git://qmp.cat/qmpfw.git qmp-3.2-rc3
-cd qmp-3.2-rc3
-git fetch --tags
-git checkout tags/v3.2-rc3
-QMP_GIT_BRANCH=v3.2-rc3 make checkout
-cd build/qmp && git checkout -b v3.2-rc3 && cd ../..
+export VERSION=3.2.1
 
+git clone git://qmp.cat/qmpfw.git qmp-$VERSION
+cd qmp-$VERSION
+git fetch --tags
+git checkout tags/v$VERSION
+QMP_GIT_BRANCH=v$VERSION make checkout
+cd build/qmp 
+git checkout -b v$VERSION
+cd ../..
 echo "src-git nycmeshfeed https://github.com/nycmeshnet/nycmeshfeed.git" >> ./build/openwrt/feeds.conf
 ./build/openwrt/scripts/feeds update -a
 ./build/openwrt/scripts/feeds install -a
 
-# select qmp-nycmesh from qmp submenu of this command:
-make menuconfig
 ```
 
 A step by step explanation of the above is [here](docs/quickstart_explained.md)
@@ -42,8 +43,12 @@ For details, see: [docs/architecture.md](docs/architecture.md)
 
 Build example:
 ```
-make T=nsm5 build
-make T=nsm5 post_build
+export TARGET=nsm5-xw
+
+# select qmp-nycmesh from qmp submenu of this command:
+make T=$TARGET menuconfig
+
+make T=$TARGET build
 
 # image will be in images/
 ```
