@@ -44,7 +44,7 @@ define Package/qmp-nycmesh
 	+luci-ssl \
 	+wget \
 	+reghack \
-	+tinc-1.1 \
+	+tinc \
 	+curl \
 	+6in4 \
 	+kmod-ipt-conntrack-extra \
