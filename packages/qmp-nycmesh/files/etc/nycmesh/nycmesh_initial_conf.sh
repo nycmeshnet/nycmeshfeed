@@ -120,6 +120,8 @@ uci commit
 (crontab -l ; echo "* * * * * /etc/nycmesh/check_tunnel.sh")| crontab -
 #add cron to push key
 (crontab -l ; echo "* * * * * /etc/nycmesh/tinc_putkey.sh")| crontab -
+#add watchdog
+(crontab -l ; echo "* * * * * /etc/nycmesh/mesh-watchdog.sh")| crontab -
 
 #firewall rules
 echo "#block access to private address space" >> /etc/firewall.user
