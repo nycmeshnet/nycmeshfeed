@@ -61,6 +61,7 @@ endef
 
 define Package/qmp-nycmesh/install
 	 $(INSTALL_DIR) $(1)/etc/nycmesh
+	 $(INSTALL_BIN) ./files/etc/nycmesh/mesh-watchdog.sh $(1)/etc/nycmesh/mesh-watchdog.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_initial_conf.sh $(1)/etc/nycmesh/nycmesh_initial_conf.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/nycmesh_configure.sh $(1)/etc/nycmesh/nycmesh_configure.sh
 	 $(INSTALL_BIN) ./files/etc/nycmesh/check_tunnel.sh $(1)/etc/nycmesh/check_tunnel.sh
