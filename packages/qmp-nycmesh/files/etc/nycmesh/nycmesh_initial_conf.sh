@@ -29,7 +29,7 @@ mac=$(ip link show eth0 | awk '/ether/ {print $2}' | sed s/://g)
 node=${mac:8}
 devname="nycmesh"
 hostname="$devname-$node"
-ssid="-nycmesh- $node"
+ssid="-NYC Mesh- $node"
 
 touch /etc/config/nycmesh
 echo "config nycmesh 'main'" > /etc/config/nycmesh
