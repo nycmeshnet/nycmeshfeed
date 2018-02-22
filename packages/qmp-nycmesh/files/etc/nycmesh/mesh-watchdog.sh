@@ -78,7 +78,7 @@ DATE=`date +%Y-%m-%d\ %H:%M:%S`
 IWINFO=`iwinfo`
 
 # find lines containing "ESSID"|get name (previous word)|replace return with ","
-WI=`echo "$IWINFO" | grep ESSID | grep -Eo '^[^ ]+' | sed ':a;N;$!ba;s/\n/, /g`
+WI=`echo "$IWINFO" | grep ESSID | grep -Eo '^[^ ]+' | sed ':a;N;$!ba;s/\n/, /g'`
 # count the number of wlan interfaces, and number of wlans with 'no signal'
 WLAN=`echo "$WI" | wc -w`
 NOSIGNAL=`echo "$IWINFO" | grep 'Signal: unknown' | wc -l`
