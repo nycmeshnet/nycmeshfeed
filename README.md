@@ -1,56 +1,45 @@
-nycmeshfeed
-===========
+# nycmeshfeed
 
-Quick start docs are here. Detailed docs are [here](docs)
+This repo is currently not being used for the newest builds.  We are however keeping the directions here for the time being
 
-Quick Environment Setup
------------------------
+## Getting started
 
-In case you don't have these tools already type (if you're in debian):  
-```
-apt-get install git make gcc g++ zlib1g-dev libssl-dev wget subversion file python apt-utils binfmt-support \
-vim apt-file xz-utils sudo subversion zlib1g-dev gawk flex unzip bzip2 gettext build-essential libncurses5-dev \
-libncursesw5-dev libssl-dev binutils cpp psmisc docbook-to-man gcc-multilib g++-multilib 
-```
+Make sure you have the following
 
-If you are on Mac, use brew. 
+* [Docker](https://www.docker.com/)
+* [Drone Cli](http://docs.drone.io/cli-installation/)
 
-This is the start of the nycmesh openwrt / qmp feed, to make building easier
-```
-export VERSION=3.2.1
-
-git clone git://qmp.cat/qmpfw.git qmp-$VERSION
-cd qmp-$VERSION
-git fetch --tags
-git checkout tags/v$VERSION
-QMP_GIT_BRANCH=v$VERSION make checkout
-cd build/qmp 
-git checkout -b v$VERSION
-cd ../..
-echo "src-git nycmeshfeed https://github.com/nycmeshnet/nycmeshfeed.git" >> ./build/openwrt/feeds.conf
-./build/openwrt/scripts/feeds update -a
-./build/openwrt/scripts/feeds install -a
-
+Once you have those two dependencies
+```bash
+clone git@github.com:nycmeshnet/lime-sdk.git
+git checkout nycmesh
+drone exec
 ```
 
-A step by step explanation of the above is [here](docs/quickstart_explained.md)
+* Note - You need a case sensitive files system.  This will work on linux machines or VMs but not OSX with default install
 
-Quick Start Build
------------------
-
-NYCMesh Feed is build using the [qMp](http://www.qmp.cat/) build system.
-For details, see: [docs/architecture.md](docs/architecture.md)
-
-Build example:
+This following is not confirmed to work, however if you don't want to create a virtual box in OSX you can try
+```bash
+hdiutil create -size 20g -type SPARSE -fs "Case-sensitive HFS+" -volname OpenWrt OpenWrt.sparseimage
+hdiutil attach OpenWrt.sparseimage
+cd /Volumes/OpenWrt
 ```
-export TARGET=nsm5-xw
+and then try the above commands - ymmv
 
-# select qmp-nycmesh from qmp submenu of this command:
-make T=$TARGET menuconfig
+## Overview
 
-make T=$TARGET build
+-> [lime-sdk](https://github.com/nycmeshnet/lime-sdk) - Repo cloned from the libremesh build system.  It builds the base image. Currently the nycmesh branch contains the following mods
+* .drone.yml - current steps to build and publish images
+* options.conf.local - points the communities customization to you fork of the repo
 
-# image will be in images/
-```
-This will take a while, but the build system has a parallelization feature,
-which is detailed in [docs/building.md](docs/building.md)
+-> [network-profiles](https://github.com/nycmeshnet/network-profiles) - Repo clone from libremesh. Part of the build step specifies what network profile to add on top of the image.
+There's a nycmesh branch that contains nycmesh.net folder which containers common-qmp-compat which is our current libremesh 
+profile that works with legacy qmp images
+
+
+### TODO
+
+We're going to track issues in this repo for the time being.
+
+
+* [Legacy docs](LEGACYDOCS.md)
