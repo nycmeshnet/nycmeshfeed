@@ -8,25 +8,22 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=tinc
-PKG_VERSION:=1.1-pre11
-PKG_RELEASE:=$(PKG_SOURCE_VERSION)
+PKG_VERSION:=1.1pre15
+PKG_RELEASE:=1
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_VERSION:=e44c337eae674120745f7c7c56a1a70919ff40ca
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
-PKG_SOURCE_URL:=http://tinc-vpn.org/git/tinc
-PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_BUILD_DIR:= $(BUILD_DIR)/$(PKG_NAME)$(PKG_VERSION)
+#PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://www.tinc-vpn.org/packages
+PKG_HASH:=64fb5847ccc7a1b35975af3eb981f727
 
-PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
 define Package/tinc
   SECTION:=utils
-  CATEGORY:=qMp
-  DEPENDS:=+liblzo +libopenssl +kmod-tun +libreadline +libncurses
+  CATEGORY:=nycmesh
+  DEPENDS:=+liblzo +libopenssl +kmod-tun +librt +libncurses +libreadline +zlib
   TITLE:=VPN tunneling daemon
   URL:=http://www.tinc-vpn.org/
   MAINTAINER:=Saverio Proto <zioproto@gmail.com>
