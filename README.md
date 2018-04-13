@@ -1,6 +1,6 @@
 # nycmeshfeed
 
-This repo is currently not being used for the newest builds.  We are however keeping the directions here for the time being
+This repo is currently used to force the updated version of tinc-1.1pre15 into the image.  We are also keeping the directions here for the time being
 
 ## Getting started
 
@@ -30,7 +30,9 @@ and then try the above commands - ymmv
 
 -> [lime-sdk](https://github.com/nycmeshnet/lime-sdk) - Repo cloned from the libremesh build system.  It builds the base image. Currently the nycmesh branch contains the following mods
 * .drone.yml - current steps to build and publish images
+* feeds.conf.default.local - contains the link to this repo to add tinc to the liremesh build
 * options.conf.local - points the communities customization to you fork of the repo
+* libremesh.sdk.config.local - contains the CONFIG_PACKAGE for tinc from this repo
 
 -> [network-profiles](https://github.com/nycmeshnet/network-profiles) - Repo clone from libremesh. Part of the build step specifies what network profile to add on top of the image.
 There's a nycmesh branch that contains nycmesh.net folder which containers common-qmp-compat which is our current libremesh 
